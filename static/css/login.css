@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffc0cb; /* Pink background */
+}
+
+.card {
+  background-color: #fff; /* White card */
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+h2 {
+  color: #444;
+  margin-bottom: 20px;
+}
+
+form input[type="text"] {
+  padding: 12px;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 20px;
+  border: 2px solid hotpink;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+form input[type="text"]:focus {
+  background-color: #fff;
+  outline: none;
+}
+
+form button {
+  padding: 12px 20px;
+  background-color: #d63384;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #b61f6d;
+}

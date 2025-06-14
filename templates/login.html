@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Login</title>
-    <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-    <h2>Enter Token</h2>
-    <form method="post" action="/login">
-        <input type="text" name="token" placeholder="JWT Token" required />
+    <link rel="stylesheet" href="/static/css/login.css">
+    <link rel="icon" type="image/png" href="https://img.icons8.com/laces/64/F25081/school.png">
+  </head>
+
+  <body>
+    <div class="card">
+      <img src="/static/images/pink-girl-icon.png" alt="Girl Icon" style="width: 80px; margin-bottom: 15px;" />
+      <h2>Enter your Student's Token Here...</h2>
+      <form method="post" action="/login">
+        <input type="text" name="token" placeholder="Student's JWT Token" required />
+        <br>
         <button type="submit">Login</button>
-    </form>
-</body>
+      </form>
+      </div>
+  </body>
 </html>
