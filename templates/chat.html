@@ -1,137 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Chat</title>
-<!--    <link rel="stylesheet" href="/static/style.css">-->
-    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            padding: 20px;
-            max-width: 800px;
-            margin: auto;
-        }
-        h2 {
-            color: #333;
-        }
-        #chat-box {
-            border: 1px solid #ccc;
-            background: #fff;
-            padding: 10px;
-            height: 400px;
-            overflow-y: auto;
-            margin-bottom: 10px;
-            border-radius: 5px;
-        }
-        .message {
-            margin: 10px 0;
-        }
-        .message strong {
-            display: block;
-            color: #007BFF;
-            margin-bottom: 4px;
-        }
-        .response-body {
-            background: #eef;
-            padding: 8px;
-            border-radius: 5px;
-        }
-        .response-body ol, .response-body ul {
-            padding-left: 1.5em;
-            margin: 0.5em 0;
-        }
-
-        .response-body li {
-            margin-bottom: 0.5em;
-        }
-        form {
-            display: flex;
-            gap: 10px;
-        }
-        input[type="text"] {
-            flex: 1;
-            padding: 10px;
-            font-size: 1em;
-        }
-        button {
-            padding: 10px 15px;
-            font-size: 1em;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        #end-session {
-            margin-top: 10px;
-            background-color: #dc3545;
-        }
-        #end-session:hover {
-            background-color: #c82333;
-        }
-    </style>
+  <title>Chat</title>
+  <link rel="stylesheet" href="/static/css/chat.css">
+    <link rel="icon" type="image/png" href="https://img.icons8.com/laces/64/F25081/school.png">
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 </head>
 <body>
-    <h2>Hi {{ first_name }} 👋</h2>
+  <div class="chat-container">
+    <div class="header">
+      <img src="https://img.icons8.com/laces/64/F25081/school.png" alt="icon">
+      <h2>Hi {{ first_name }} 👋</h2>
+    </div>
     <div id="chat-box"></div>
     <form id="chat-form">
-        <input type="text" id="message" placeholder="Type your message..." required />
-        <button type="submit">Send</button>
+      <input type="text" id="message" placeholder="Type your message..." required />
+      <button type="submit">Send</button>
     </form>
+    <button id="end-session" style="margin-top: 10px; background-color: #dc3545;">End Session</button>
+  </div>
 
-    <button id="end-session">End Session</button>
-
-    <script>
-        const socket = io("http://localhost:8001", { transports: ["websocket"] });
-
-        socket.on("connect", () => {
-            console.log("Connected to model server");
-        });
-
-        socket.on("model_response", function(data) {
-            console.log("Browser received response:", data.response);
-
-            const chatBox = document.getElementById("chat-box");
-
-            const modelMsgDiv = document.createElement("div");
-            modelMsgDiv.classList.add("message", "model");
-
-            const label = document.createElement("strong");
-            label.innerText = "Model:";
-            modelMsgDiv.appendChild(label);
-
-            const responseBody = document.createElement("div");
-            responseBody.classList.add("response-body");
-            responseBody.innerHTML = data.response
-            modelMsgDiv.appendChild(responseBody);
-
-            chatBox.appendChild(modelMsgDiv);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        });
-
-        document.getElementById("chat-form").addEventListener("submit", function(e) {
-            e.preventDefault();
-            const input = document.getElementById("message");
-            const message = input.value;
-
-            const userMsgDiv = document.createElement("div");
-            userMsgDiv.classList.add("message", "user");
-            userMsgDiv.innerHTML = `<strong>You:</strong><div class="response-body">${message}</div>`;
-
-            document.getElementById("chat-box").appendChild(userMsgDiv);
-            socket.emit("send_prompt", { student_code: "{{ student_code }}", prompt: message });
-            input.value = "";
-        });
-
-        document.getElementById("end-session").addEventListener("click", () => {
-            socket.disconnect();
-            alert("Session ended. Redirecting to login...");
-            window.location.href = "/";
-        });
-    </script>
+  <script src="/static/js/chat.js"></script>
 </body>
 </html>
+
