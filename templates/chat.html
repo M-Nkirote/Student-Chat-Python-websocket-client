@@ -3,24 +3,29 @@
 <head>
   <title>Chat</title>
   <link rel="stylesheet" href="/static/css/chat.css">
-    <link rel="icon" type="image/png" href="https://img.icons8.com/laces/64/F25081/school.png">
+  <link rel="icon" type="image/png"
+        href="https://img.icons8.com/laces/64/F25081/school.png">
   <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+
 </head>
 <body>
-  <div class="chat-container">
-    <div class="header">
-      <img src="https://img.icons8.com/laces/64/F25081/school.png" alt="icon">
-      <h2>Hi {{ first_name }} 👋</h2>
-    </div>
-    <div id="chat-box"></div>
-    <form id="chat-form">
-      <input type="text" id="message" placeholder="Type your message..." required />
-      <button type="submit">Send</button>
-    </form>
-    <button id="end-session" style="margin-top: 10px; background-color: #dc3545;">End Session</button>
+<div class="chat-container">
+  <div class="header">
+    <img src="https://img.icons8.com/laces/64/F25081/school.png">
+    <h2>Hi {{ first_name }} 👋</h2>
   </div>
 
-  <script src="/static/js/chat.js"></script>
+  <div id="chat-box"></div>
+
+  <form id="chat-form">
+    <input id="message" type="text" placeholder="Type your message…" required>
+    <button type="submit">Send</button>
+  </form>
+
+  <button id="end-session" style="margin-top:10px">End Session</button>
+</div>
+
+<script> window.TOKEN = "{{ token }}";</script>
+<script src="/static/js/chat.js"></script>
 </body>
 </html>
-

@@ -1,46 +1,36 @@
-const socket = io("http://localhost:8001", { transports: ["websocket"] });
+const token = window.TOKEN;
 
-socket.on("connect", () => {
-  console.log("Connected to model server");
-});
+async function sendToBackend(text) {
+  const r = await fetch("/send-message", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ token, message: text })
+  });
+  return r.json();
+}
 
-socket.on("model_response", function(data) {
-  const chatBox = document.getElementById("chat-box");
+const chatBox = document.getElementById("chat-box");
 
-  const msgDiv = document.createElement("div");
-  msgDiv.classList.add("message", "model");
-  msgDiv.innerHTML = `
-    <img src="https://img.icons8.com/laces/64/F25081/school.png" alt="Model">
-    <div class="message-content">
-      <strong>Model:</strong><br>${data.response}
-    </div>
-  `;
-  chatBox.appendChild(msgDiv);
+function add(role, html) {
+  const div = document.createElement("div");
+  div.className = "message " + role;
+  div.innerHTML = `
+    <img src="https://img.icons8.com/laces/64/F25081/school.png">
+    <div class="message-content">${html}</div>`;
+  chatBox.appendChild(div);
   chatBox.scrollTop = chatBox.scrollHeight;
-});
+}
 
-document.getElementById("chat-form").addEventListener("submit", function(e) {
+document.getElementById("chat-form").addEventListener("submit", async (e) => {
   e.preventDefault();
-  const input = document.getElementById("message");
-  const message = input.value;
+  const box = document.getElementById("message");
+  const text = box.value.trim();
+  if (!text) return;
+  add("user", `<strong>You:</strong><br>${text}`);
+  box.value = "";
 
-  const chatBox = document.getElementById("chat-box");
-  const userMsgDiv = document.createElement("div");
-  userMsgDiv.classList.add("message", "user");
-  userMsgDiv.innerHTML = `
-    <img src="https://img.icons8.com/laces/64/F25081/school.png" alt="You">
-    <div class="message-content">
-      <strong>You:</strong><br>${message}
-    </div>
-  `;
-  chatBox.appendChild(userMsgDiv);
-
-  socket.emit("send_prompt", { student_code: "{{ student_code }}", prompt: message });
-  input.value = "";
+  const data = await sendToBackend(text);
+  add("model", `<strong>Model:</strong><br>${data.response}`);
 });
 
-document.getElementById("end-session").addEventListener("click", () => {
-  socket.disconnect();
-  alert("Session ended. Redirecting to login...");
-  window.location.href = "/";
-});
+document.getElementById("end-session").onclick = () => location.href = "/";
