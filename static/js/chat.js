@@ -1,5 +1,26 @@
 const token = window.TOKEN;
 
+const sio = io("http://localhost:8001", {
+    auth: { token }  // Optional: send token for server-side validation (if you implement)
+  });
+
+  sio.on("connect", () => {
+    console.log("Socket connected with id:", sio.id);
+  });
+
+  sio.on("disconnect", () => {
+    console.log("Socket disconnected");
+  });
+
+  // Example to handle model_response if needed on client side
+  sio.on("model_response", (data) => {
+    console.log("Model response:", data);
+    // Update chat UI accordingly
+  });
+
+  // Make sio globally accessible (for disconnect on end-session)
+  window.sio = sio;
+
 async function sendToBackend(text) {
   const r = await fetch("/send-message", {
     method: "POST",
@@ -33,4 +54,9 @@ document.getElementById("chat-form").addEventListener("submit", async (e) => {
   add("model", `<strong>Model:</strong><br>${data.response}`);
 });
 
-document.getElementById("end-session").onclick = () => location.href = "/";
+document.getElementById("end-session").onclick = async () => {
+  if (sio && sio.connected) {
+    await sio.disconnect();  // Explicit disconnect
+  }
+  location.href = "/";
+};
