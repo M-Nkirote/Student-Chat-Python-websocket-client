@@ -1,6 +1,6 @@
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #ffc0cb; /* soft pink background */
+  background-color: #ffc0cb;
   margin: 0;
   padding: 0;
   display: flex;
@@ -91,7 +91,7 @@ input[type="text"]:focus {
   outline: none;
 }
 
-button {
+.submit-button {
   background-color: #d63384;
   color: #fff;
   border: none;
@@ -101,6 +101,22 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.submit-button:hover {
   background-color: #b61f6d;
+}
+
+.end-session-button {
+  background-color: #fff;
+  border: 2px solid #b71c1c;
+  color: #b71c1c;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.end-session-button:hover {
+  background-color: #b71c1c;
+  color: #fff;
 }

@@ -36,12 +36,11 @@ async def disconnect_from_server():
         await sio.disconnect()
 
 
-async def send_prompt_to_model(message: str, student_code: str, first_name: str):
-    # Make sure connection is alive before sending prompt
+async def send_prompt_to_model(message: str, student_code: str, first_name: str, session_id: str):
     await connect_to_server()
 
     response_event.clear()
-    await sio.emit("send_prompt", {"student_code": student_code, "first_name": first_name, "prompt": message})
+    await sio.emit("send_prompt", {"student_code": student_code, "first_name": first_name, "prompt": message, "session_id": session_id})
     await response_event.wait()
     return response_data
 

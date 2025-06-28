@@ -19,13 +19,16 @@
 
   <form id="chat-form">
     <input id="message" type="text" placeholder="Type your message…" required>
-    <button type="submit">Send</button>
+    <button class="submit-button" type="submit">Send</button>
   </form>
 
-  <button id="end-session" style="margin-top:10px">End Session</button>
+  <button class="end-session-button" id="end-session">End Session</button>
 </div>
 
-<script> window.TOKEN = "{{ token }}";</script>
+<script>
+  window.TOKEN = "{{ token }}";
+  window.SESSION_ID = "{{ session_id }}";
+</script>
 <script src="/static/js/chat.js"></script>
 </body>
 </html>
