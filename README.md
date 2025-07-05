@@ -78,4 +78,5 @@ You should ensure that the backend server is already running (Refer to the serve
 * Copy your generated token and use it to log in 🎊 ☺️
   <img width="1279" alt="Screenshot 2025-06-28 at 14 39 02" src="https://github.com/user-attachments/assets/1228df27-a8aa-44cb-a060-fba028751cd9" />
  
-
+### ${\textsf{\color{#FFC0CB}🙌 Contributions}}$
+Feel free to fork the repo, suggest improvements, or file issues.
