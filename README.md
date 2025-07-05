@@ -75,7 +75,7 @@ You should ensure that the backend server is already running (Refer to the serve
 * * To create the random key, after cloning this project, run the file `src/create_dummy_secret_key.py`, and copy the output.
   * Paste the created key in the section 'Sign JWT: Secret' at https://jwt.io/
     <img width="628" alt="Screenshot 2025-06-28 at 14 37 35" src="https://github.com/user-attachments/assets/23cd1638-83ad-4f3c-86ad-4412acd54152" />
-* Copy your generated token ☺️
+* Copy your generated token and use it to log in 🎊 ☺️
   <img width="1279" alt="Screenshot 2025-06-28 at 14 39 02" src="https://github.com/user-attachments/assets/1228df27-a8aa-44cb-a060-fba028751cd9" />
  
 
