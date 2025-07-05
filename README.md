@@ -56,7 +56,7 @@ This project interacts with the FastAPI+Socket.IO backend to send prompts, recei
 > `uvicorn main:app --reload --port 8000`
 
 Note!
-You should ensure that the backend server is already running (Refer to the server project: Student-Chat-Python-websocket-server, to set it up.)
+You should ensure that the backend server is already running (Refer to the server project: [https://github.com/M-Nkirote/Student-Chat-Python-websocket-server](url), to set it up.)
 
 ## ${\textsf{\color{#C25A7C}Gallery}}$ 📷
 ### ${\textsf{\color{#FFC0CB}Login Page}}$
